@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(direction +"  ,  "+ direction.normalized); // Do I really need normalization?
                 rb.AddForce(direction.normalized * thrustForce);
         }
-        // adding booster
         if (Mouse.current.leftButton.isPressed || keyPressed)
         {
             boosterFlame.SetActive(true);
