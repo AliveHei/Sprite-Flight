@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         highScoreText.style.display = DisplayStyle.None;
         highScore = PlayerPrefs.GetFloat("HighScore");
 
-
         resetHighScoreButton = uiDocument.rootVisualElement.Q<Button>("ResetHighScore");
         resetHighScoreButton.style.display = DisplayStyle.None;
 
