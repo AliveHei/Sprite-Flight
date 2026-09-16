@@ -1,21 +1,51 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
-{    
+{
+    private float elapsedTime = 0f;
+    private float score = 0f;
+    private float scoreMultiplier = 10f;
     public float thrustForce = 0.25f;
     Rigidbody2D rb;
     public GameObject boosterFlame;
+    public UIDocument uiDocument;
+    private Label scoreText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        scoreText = uiDocument.rootVisualElement.Q<Label>("ScoreLabel");
     }
 
     // Update is called once per frame
     void Update()
+    {
+
+        UpdateScore();
+        MovePlayer();
+        
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
+
+    void UpdateScore()
+    {
+        // implements score
+        elapsedTime += Time.deltaTime;
+        score = Mathf.FloorToInt(elapsedTime * scoreMultiplier);
+        scoreText.text = "Score: " + score;
+        
+    }
+
+    void MovePlayer()
     {
         Vector2 direction;
         // checks if any of the movement keys are pressed (WASD)
@@ -56,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(direction +"  ,  "+ direction.normalized); // Do I really need normalization?
                 rb.AddForce(direction.normalized * thrustForce);
         }
+        // adding booster
         if (Mouse.current.leftButton.isPressed || keyPressed)
         {
             boosterFlame.SetActive(true);
@@ -64,11 +95,5 @@ public class PlayerController : MonoBehaviour
         {
             boosterFlame.SetActive(false);
         }
-    }
-
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
     }
 }
