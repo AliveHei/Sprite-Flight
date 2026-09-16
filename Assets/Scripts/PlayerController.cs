@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 direction;
         // checks if any of the movement keys are pressed (WASD)
-        Boolean keyPressed = Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed || Keyboard.current.aKey.isPressed;
+        Boolean keyPressed = Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed || Keyboard.current.aKey.isPressed || Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
         
         if (Mouse.current.leftButton.isPressed)
         {   
@@ -106,19 +106,19 @@ public class PlayerController : MonoBehaviour
         else if (keyPressed)
         {       // adds each direction to the vector so its calculates the vector direction 
                 direction = Vector2.zero;
-                if (Keyboard.current.wKey.isPressed)
+                if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
                 {
                     direction += Vector2.up;
                 }
-                if (Keyboard.current.sKey.isPressed)
+                if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
                 {
                     direction += Vector2.down;
                 }
-                if (Keyboard.current.dKey.isPressed)
+                if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
                 {
                     direction += Vector2.right;
                 }
-                if (Keyboard.current.aKey.isPressed)
+                if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
                 {
                     direction += Vector2.left;
                 }
